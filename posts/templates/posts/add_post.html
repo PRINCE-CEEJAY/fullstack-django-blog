@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title %} ADD POST PAGE {% endblock %}
+
+{% block body %} 
+<div>
+    <h1>Hi, Create your post below </h1>
+    <form>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
