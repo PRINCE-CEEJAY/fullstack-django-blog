@@ -5,8 +5,17 @@
 {% block body %} 
 <div>
     <h1>Hi, Create your post below </h1>
-    <form>
+    <form method="post", action="{% url 'add_post' %}">
         {% csrf_token %}
+        <div>
+            <label>Post Title: </label>
+            <input name="title" placeholder="Enter Title" />
+        </div>
+        <div>
+            <label>Post Title: </label>
+            <textarea name="text" placeholder="Type your post here .."></textarea> 
+        </div>
+        <button>Add Post</button>
     </form>
 </div>
 {% endblock %}
