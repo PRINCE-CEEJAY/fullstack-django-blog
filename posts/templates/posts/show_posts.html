@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %} SAVED POSTS {% endblock %}
+
+{% block content %}  
+<h1>Available Posts </h1>   
+<div class="grid grid-cols-3">
+    {% for post in posts%}
+    <ul class="m-2 flex flex-col justify-center items-center rounded-md bg-gray-800 p-2">
+        <li class="underline"><spa class="text-blue-500">Title: </spa> {{ post.title }}</li>
+        <li><span class="text-blue-500">Post:</span> {{ post.body }}</li>
+        <li><span class="text-blue-500">Date Created: </span> {{ post.createdAt }}</li>
+        <li> <span class="text-blue-500">ID: </span> {{ post.id }}</li>
+    </ul>
+    {% endfor %}
+</div>   
+{% endblock %}

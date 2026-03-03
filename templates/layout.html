@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG PROJECT - {% block title%} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'scripts/javascript.js' %}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <nav class="flex w-full justify-evenly items-center rounded-md bg-blue-800 p-2">
+        <a href="{% url 'homepage' %}" class="hover:opacity-85 opacity-100 hover:border-b-2">Home 🏡</a>
+        <a href="{% url 'register' %}" class="hover:opacity-85 opacity-100 hover:border-b-2">Register ✍</a>
+        <a href="{% url 'login' %}" class="hover:opacity-85 opacity-100 hover:border-b-2">Login 🔏</a>
+        <a href="{% url 'add_post' %}" class="hover:opacity-85 opacity-100 hover:border-b-2">Add Post ➕</a>
+        <a href="{% url 'show_posts' %}" class="hover:opacity-85 opacity-100 hover:border-b-2">Posts 📝</a>
+    </nav>
+    <div class="flex flex-col justify-center items-center">
+        {% block content %}        
+        {% endblock %}
+    </div>
+</body>
+</html>
