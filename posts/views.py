@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .models import Post
 
 # Create your views here.
@@ -24,3 +23,29 @@ def add_post(request):
 def show_posts(request): 
     posts = Post.objects.all()
     return render(request, 'posts/show_posts.html', {'posts': posts})
+
+def delete_post(request, id):
+    post = get_object_or_404(Post, id=id)
+    if post:
+        post.delete()
+        return redirect('show_posts')
+    return HttpResponse(f"Post with the ID {id} does not exist")
+
+
+def update_post(request, id):
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=id)
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+
+        if post:
+            if title:
+                post.title = title
+            if body:
+                post.body = body
+            post.save()
+            return redirect('show_posts')
+        return HttpResponse(f"Post with the ID {id} does not exist")
+    return HttpResponse(f"METHOD NOT ALLOWED")
+    
+
