@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .models import Post
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='login')
 def add_post(request):
     if request.method == 'POST':
         data = request.POST
@@ -20,10 +22,12 @@ def add_post(request):
 
     return render(request, 'posts/add_post.html')
 
+@login_required(login_url='login')
 def show_posts(request): 
     posts = Post.objects.all()
     return render(request, 'posts/show_posts.html', {'posts': posts})
 
+@login_required(login_url='login')
 def delete_post(request, id):
     post = get_object_or_404(Post, id=id)
     if post:
@@ -32,6 +36,7 @@ def delete_post(request, id):
     return HttpResponse(f"Post with the ID {id} does not exist")
 
 
+@login_required(login_url='login')
 def update_post(request, id):
     if request.method == "POST":
         post = get_object_or_404(Post, id=id)

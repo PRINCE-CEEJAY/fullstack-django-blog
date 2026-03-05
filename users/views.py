@@ -24,6 +24,7 @@ def login_view(request):
                 return redirect('admin:index')
             login(request, user)
             return redirect('homepage')
+        return redirect('login')
     else:
         form = AuthenticationForm()
         return render(request, 'users/login.html', {'form': form})
