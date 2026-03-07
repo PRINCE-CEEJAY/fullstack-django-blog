@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'posts'
+    'posts',
+    'products'    
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_URL = "login"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

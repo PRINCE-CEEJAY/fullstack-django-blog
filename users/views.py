@@ -3,12 +3,13 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             login(request, form.save())
-            return redirect('dashboard')    
+            return redirect('users:dashboard')    
         return render(request, 'users/register.html', {'form': form})
     else:
         form = UserCreationForm()
@@ -25,7 +26,7 @@ def login_view(request):
             # redirect admin to admin panel and any other user to dashboard
             if member.is_staff:
                 return redirect('admin:index')
-            return redirect('dashboard')
+            return redirect('users:dashboard')
         # if user details is invalid, send back to login page
         return render(request, 'users/login.html', {'form': form})
     else:
@@ -34,10 +35,10 @@ def login_view(request):
     
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('users:login')
 
 
-@login_required
+@login_required(login_url='users:login')
 def dashboard(request):
     return render(request, 'users/dashboard.html')
 
